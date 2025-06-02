@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0; 
+        }
+        html{
+            width: 100vw;
+            height: 100vh;
+        }
+        body{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.658);
+        }
+        .Outer{
+            border-radius: 2rem;
+            box-shadow: 1px 1px 1px 1px;
+            width: 32%;
+            height: 85%;
+            background-color:rgba(161, 150, 150, 0.781);
+            display: grid;
+            justify-content: center;
+            grid-template-rows: 14% 88%;
+            grid-template-columns: 95%;
+            border-style: solid;
+        }
+        .Screen{
+            margin-left: 2%;
+            margin-top: 3%;
+            border-radius: 10%;
+            width: 95%;
+            background: white;
+            border-style: solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+      .Buttons{
+        margin-left: 2%;  
+        width: 95%;
+        border-radius: 3%;  
+        margin-top: 2%;
+        background-color: rgb(154, 182, 182);
+        height: 93%;
+        color:black;
+        display: flex;
+        gap: 2%;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        border-style: solid;
+      }
+    span{
+        border-style: solid;
+        cursor: pointer;
+        font-size: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 5px;
+        width: 5px;
+        border-radius: 50%;
+        padding: 8%;
+        background-color: white;
+
+    }
+    span:hover{
+        transform: scale(1.09,1.09);
+        color: white;
+        background:linear-gradient(45deg,red,purple);
+    }
+    h1{
+        text-shadow: 2px -1px 2px goldenrod;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    </style>
+</head>
+<body>
+    <div class="Outer">
+        <div class="Screen" id="display"><h1>hello</h1></div>
+        <div class="Buttons">
+            <span class="button" id="C" onclick="clearScreen()">C</span>
+            <span class="button" id="R" onclick="removeLastElement()">R</span>
+            <span class="button" id="1" onclick="One()">1</span>
+            <span class="button" id="2" onclick="Two()">2</span>
+            <span class="button" id="3" onclick="Three()">3</span>
+            <span class="button" id="4" onclick="Four()">4</span>
+            <span class="button" id="5" onclick="Five()">5</span>
+            <span class="button" id="6" onclick="Six()">6</span>
+            <span class="button" id="7" onclick="Seven()">7</span>
+            <span class="button" id="8" onclick="Eight()">8</span>
+            <span class="button" id="9" onclick="Nine()">9</span>
+            <span class="button" id="0" onclick="Zero()">0</span>
+            <span class="button" id="X" onclick="Mul()">X</span>
+            <span class="button" id="+" onclick="Add()">+</span>
+            <span class="button" id="-" onclick="Sub()">-</span>
+            <span class="button" id="/" onclick="Div()">/</span>
+            <span class="button" id="%" onclick="Mod()">%</span>
+            <span class="button" id="(" onclick="OpenPar()">(</span>
+            <span class="button" id=")" onclick="ClosePar()">)</span>
+            <span class="button" onclick="Equal()">=</span>
+        </div>
+    </div>
+    <script>
+        var Result = "";
+        function updateDisplay() {display.innerHTML = `<h1>${Result || "0"}</h1>`;}
+        function removeLastElement(){Result=Result.substring(0,Result.length-1); 
+            updateDisplay(); }
+    function clearScreen(){Result="0"; updateDisplay();}
+    function One()  { Result += "1"; updateDisplay(); }
+    function Two()  { Result += "2"; updateDisplay(); }
+    function Three(){ Result += "3"; updateDisplay(); }
+    function Four() { Result += "4"; updateDisplay(); }
+    function Five() { Result += "5"; updateDisplay(); }
+    function Six()  { Result += "6"; updateDisplay(); }
+    function Seven(){ Result += "7"; updateDisplay(); }
+    function Eight(){ Result += "8"; updateDisplay(); }
+    function Nine() { Result += "9"; updateDisplay(); }
+    function Zero() { Result += "0"; updateDisplay(); }
+    function Add()     { Result += "+"; updateDisplay(); }
+    function Sub()     { Result += "-"; updateDisplay(); }
+    function Mul()     { Result += "*"; updateDisplay(); }
+    function Div()     { Result += "/"; updateDisplay(); }
+    function Mod()     { Result += "%"; updateDisplay(); }
+    function OpenPar() { Result += "("; updateDisplay(); }
+    function ClosePar(){ Result += ")"; updateDisplay(); }
+    function Equal() {
+        try {
+            Result = eval(Result).toString();
+        } catch {
+            Result = "Error";
+        }
+        updateDisplay();
+    }
+    </script>
+</body>
+</html>
