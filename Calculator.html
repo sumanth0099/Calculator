@@ -1,146 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0; 
-        }
-        html{
-            width: 100vw;
-            height: 100vh;
-        }
-        body{
-            height: 100%;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(0, 0, 0, 0.658);
-        }
-        .Outer{
-            border-radius: 2rem;
-            box-shadow: 1px 1px 1px 1px;
-            width: 32%;
-            height: 85%;
-            background-color:rgba(161, 150, 150, 0.781);
-            display: grid;
-            justify-content: center;
-            grid-template-rows: 14% 88%;
-            grid-template-columns: 95%;
-            border-style: solid;
-        }
-        .Screen{
-            margin-left: 2%;
-            margin-top: 3%;
-            border-radius: 10%;
-            width: 95%;
-            background: white;
-            border-style: solid;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-      .Buttons{
-        margin-left: 2%;  
-        width: 95%;
-        border-radius: 3%;  
-        margin-top: 2%;
-        background-color: rgb(154, 182, 182);
-        height: 93%;
-        color:black;
-        display: flex;
-        gap: 2%;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        border-style: solid;
-      }
-    span{
-        border-style: solid;
-        cursor: pointer;
-        font-size: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 5px;
-        width: 5px;
-        border-radius: 50%;
-        padding: 8%;
-        background-color: white;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Calculator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #1f1f1f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
+    .Outer {
+      display: flex;
+      flex-direction: column;
+      background-color: #2e2e2e;
+      border-radius: 20px;
+      box-shadow: 0px 0px 15px #000;
+      padding: 20px;
+      width: 90vw;
+      max-width: 600px;
+      height: 90vh;
+      max-height: 600px;
+      transition: all 0.3s ease;
     }
-    span:hover{
-        transform: scale(1.09,1.09);
-        color: white;
-        background:linear-gradient(45deg,red,purple);
+
+    .Screen {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: right;
+      font-size: 2rem;
+      min-height: 60px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      word-wrap: break-word;
+      flex-shrink: 0;
     }
-    h1{
-        text-shadow: 2px -1px 2px goldenrod;
-        font-family: 'Courier New', Courier, monospace;
+
+    .Buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      flex-grow: 1;
     }
-    </style>
+
+    .button {
+      height: 100%;
+      background: #444;
+      color: white;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .button:hover {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      transform: scale(1.05);
+    }
+
+    .button.operator {
+      background-color: #ff9f43;
+    }
+
+    .button.equals {
+      background-color: #28c76f;
+    }
+
+    .button.clear {
+      background-color: #ea5455;
+    }
+
+    /* Landscape Mode */
+    @media (orientation: landscape) and (min-width: 600px) {
+      .Outer {
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: space-between;
+      }
+
+      .Screen {
+        flex: 1;
+        margin-bottom: 0;
+        margin-right: 20px;
+        font-size: 2.2rem;
+      }
+
+      .Buttons {
+        flex: 1;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="Outer">
-        <div class="Screen" id="display"><h1>hello</h1></div>
-        <div class="Buttons">
-            <span class="button" id="C" onclick="clearScreen()">C</span>
-            <span class="button" id="R" onclick="removeLastElement()">R</span>
-            <span class="button" id="1" onclick="One()">1</span>
-            <span class="button" id="2" onclick="Two()">2</span>
-            <span class="button" id="3" onclick="Three()">3</span>
-            <span class="button" id="4" onclick="Four()">4</span>
-            <span class="button" id="5" onclick="Five()">5</span>
-            <span class="button" id="6" onclick="Six()">6</span>
-            <span class="button" id="7" onclick="Seven()">7</span>
-            <span class="button" id="8" onclick="Eight()">8</span>
-            <span class="button" id="9" onclick="Nine()">9</span>
-            <span class="button" id="0" onclick="Zero()">0</span>
-            <span class="button" id="X" onclick="Mul()">X</span>
-            <span class="button" id="+" onclick="Add()">+</span>
-            <span class="button" id="-" onclick="Sub()">-</span>
-            <span class="button" id="/" onclick="Div()">/</span>
-            <span class="button" id="%" onclick="Mod()">%</span>
-            <span class="button" id="(" onclick="OpenPar()">(</span>
-            <span class="button" id=")" onclick="ClosePar()">)</span>
-            <span class="button" onclick="Equal()">=</span>
-        </div>
+  <div class="Outer">
+    <div class="Screen" id="display">0</div>
+    <div class="Buttons">
+      <button class="button clear" onclick="clearScreen()">C</button>
+      <button class="button" onclick="removeLastElement()">⌫</button>
+      <button class="button" onclick="Negate()">±</button>
+      <button class="button operator" onclick="Mod()">%</button>
+
+      <button class="button" onclick="Seven()">7</button>
+      <button class="button" onclick="Eight()">8</button>
+      <button class="button" onclick="Nine()">9</button>
+      <button class="button operator" onclick="Div()">÷</button>
+
+      <button class="button" onclick="Four()">4</button>
+      <button class="button" onclick="Five()">5</button>
+      <button class="button" onclick="Six()">6</button>
+      <button class="button operator" onclick="Mul()">×</button>
+
+      <button class="button" onclick="One()">1</button>
+      <button class="button" onclick="Two()">2</button>
+      <button class="button" onclick="Three()">3</button>
+      <button class="button operator" onclick="Sub()">−</button>
+
+      <button class="button" onclick="Zero()">0</button>
+      <button class="button" onclick="Decimal()">.</button>
+      <button class="button" onclick="Power()">^</button>
+      <button class="button operator" onclick="Add()">+</button>
+
+      <button class="button" onclick="OpenPar()">(</button>
+      <button class="button" onclick="ClosePar()">)</button>
+      <button class="button equals" style="grid-column: span 2" onclick="Equal()">=</button>
     </div>
-    <script>
-        var Result = "";
-        function updateDisplay() {display.innerHTML = `<h1>${Result || "0"}</h1>`;}
-        function removeLastElement(){Result=Result.substring(0,Result.length-1); 
-            updateDisplay(); }
-    function clearScreen(){Result="0"; updateDisplay();}
-    function One()  { Result += "1"; updateDisplay(); }
-    function Two()  { Result += "2"; updateDisplay(); }
-    function Three(){ Result += "3"; updateDisplay(); }
-    function Four() { Result += "4"; updateDisplay(); }
-    function Five() { Result += "5"; updateDisplay(); }
-    function Six()  { Result += "6"; updateDisplay(); }
-    function Seven(){ Result += "7"; updateDisplay(); }
-    function Eight(){ Result += "8"; updateDisplay(); }
-    function Nine() { Result += "9"; updateDisplay(); }
-    function Zero() { Result += "0"; updateDisplay(); }
-    function Add()     { Result += "+"; updateDisplay(); }
-    function Sub()     { Result += "-"; updateDisplay(); }
-    function Mul()     { Result += "*"; updateDisplay(); }
-    function Div()     { Result += "/"; updateDisplay(); }
-    function Mod()     { Result += "%"; updateDisplay(); }
-    function OpenPar() { Result += "("; updateDisplay(); }
-    function ClosePar(){ Result += ")"; updateDisplay(); }
-    function Equal() {
-        try {
-            Result = eval(Result).toString();
-        } catch {
-            Result = "Error";
-        }
-        updateDisplay();
+  </div>
+
+  <script>
+    let Result = "";
+    const display = document.getElementById("display");
+
+    function updateDisplay() {
+      display.innerText = Result || "0";
     }
-    </script>
+
+    function clearScreen() {
+      Result = "";
+      updateDisplay();
+    }
+
+    function removeLastElement() {
+      Result = Result.slice(0, -1);
+      updateDisplay();
+    }
+
+    function append(val) {
+      if (Result === "0" && val !== ".") Result = "";
+      Result += val;
+      updateDisplay();
+    }
+
+    function One()   { append("1"); }
+    function Two()   { append("2"); }
+    function Three() { append("3"); }
+    function Four()  { append("4"); }
+    function Five()  { append("5"); }
+    function Six()   { append("6"); }
+    function Seven() { append("7"); }
+    function Eight() { append("8"); }
+    function Nine()  { append("9"); }
+    function Zero()  { append("0"); }
+    function Decimal() { append("."); }
+
+    function Add()      { append("+"); }
+    function Sub()      { append("-"); }
+    function Mul()      { append("*"); }
+    function Div()      { append("/"); }
+    function Mod()      { append("%"); }
+    function Power()    { append("**"); }
+    function OpenPar()  { append("("); }
+    function ClosePar() { append(")"); }
+
+    function Negate() {
+      if (Result) {
+        try {
+          Result = (-eval(Result)).toString();
+        } catch {
+          Result = "Error";
+        }
+      }
+      updateDisplay();
+    }
+
+    function Equal() {
+      try {
+        Result = eval(Result).toString();
+      } catch {
+        Result = "Error";
+      }
+      updateDisplay();
+    }
+  </script>
 </body>
 </html>
